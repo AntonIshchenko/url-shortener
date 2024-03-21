@@ -34,19 +34,27 @@ func main() {
 		os.Exit(1)
 	}
 
+	// id, err := storage.SaveURL("https://google.com", "google")
+	// if err != nil {
+	// 	log.Error("failed to init storage", sl.Err(err))
+	// 	os.Exit(1)
+	// }
+	// log.Info("saved url", slog.Int64("id", id))
+
+	resultUrl, err := storage.GetURL("google")
+	log.Info("Url retreived from database", slog.String("result URL", resultUrl))
+	if err != nil {
+		log.Error("failed to get url by alias", sl.Err(err))
+		os.Exit(1)
+	}
+
 	id, err := storage.SaveURL("https://google.com", "google")
 	if err != nil {
 		log.Error("failed to init storage", sl.Err(err))
 		os.Exit(1)
 	}
-	log.Info("saved url", slog.Int64("id", id))
 
-	id, err = storage.SaveURL("https://google.com", "google")
-	if err != nil {
-		log.Error("failed to init storage", sl.Err(err))
-		os.Exit(1)
-	}
-
+	_ = resultUrl
 	_ = storage
 	_ = id
 
